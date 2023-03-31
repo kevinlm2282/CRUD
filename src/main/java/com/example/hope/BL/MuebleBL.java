@@ -2,13 +2,16 @@ package com.example.hope.BL;
 
 
 import java.io.Console;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.hope.DAO.MuebleRepository;
+import org.springframework.data.domain.Sort;
+
 import com.example.hope.DAO.Entity.MuebleEntity;
+import com.example.hope.DAO.Repository.MuebleRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -26,7 +29,7 @@ public class MuebleBL {
 
     public List<MuebleEntity> getMuebles() {
         LOGGER.info("BUSINESS-LOGIC: Iniciando consulta para obtener el listado de muebles");
-        List<MuebleEntity> listaMuebles = this.muebleRepository.findAll();
+        List<MuebleEntity> listaMuebles = this.muebleRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         LOGGER.info("BUSINESS-LOGIC: La consulta para obtener muebles regresa esto: ", listaMuebles);
         return listaMuebles;
     }
@@ -42,7 +45,7 @@ public class MuebleBL {
     public MuebleEntity postMueble(MuebleEntity mueble){
         LOGGER.info("BUSINESS-LOGIC Iniciado consulta para guardar mueble");
         MuebleEntity muebleEntity = this.muebleRepository.save(mueble);
-        LOGGER.info("El resultado de la consulta de registro de mueble es :", muebleEntity);
+        LOGGER.info("El resultado de la consulta de registro de mueble es {}:", muebleEntity);
         return muebleEntity;
     }
 
@@ -53,6 +56,8 @@ public class MuebleBL {
         muebleEntity.setNombre(mueble.getNombre());
         muebleEntity.setColor(mueble.getColor());
         muebleEntity.setCantidad(mueble.getCantidad());
+        muebleEntity.setPrecio(mueble.getPrecio());
+        muebleEntity.setUpdatDateTime(LocalDateTime.now());
         MuebleEntity actualizar = this.muebleRepository.save(muebleEntity);
         LOGGER.info("BUSINNES-LOGIC El resultado de la peticion de actualizacion es:",actualizar);
         return actualizar;
