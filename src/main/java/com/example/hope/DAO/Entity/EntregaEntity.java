@@ -1,5 +1,6 @@
 package com.example.hope.DAO.Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -42,7 +43,7 @@ public class EntregaEntity {
     @Column(name = "cliente")
     private String cliente;
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "entrega", fetch = FetchType.LAZY)
-    private List<MuebleEntregasEntity> muebles;
+    private List<MuebleEntregasEntity> muebles = new ArrayList<>();
 
     public EntregaEntity(Long id, Date fecha_entrega, Date fecha_entrega_real, Date fecha_inicio_pedido,
             String cliente) {
@@ -56,9 +57,16 @@ public class EntregaEntity {
     @Override
     public String toString() {
         return "EntregaEntity [id=" + id + ", fecha_entrega=" + fecha_entrega + ", fecha_entrega_real="
-                + fecha_entrega_real + ", fecha_inicio_pedido=" + fecha_inicio_pedido + ", cliente=" + cliente
-                + ", muebles=" + muebles + "]";
+                + fecha_entrega_real + ", fecha_inicio_pedido=" + fecha_inicio_pedido + ", cliente=" + cliente + "]";
     }
+
+    // @Override
+    // public String toString() {
+    //     return "EntregaEntity [id=" + id + ", fecha_entrega=" + fecha_entrega + ", fecha_entrega_real="
+    //             + fecha_entrega_real + ", fecha_inicio_pedido=" + fecha_inicio_pedido + ", cliente=" + cliente
+    //             + ", muebles=" + muebles + "]";
+    // }
+    
 
     
     

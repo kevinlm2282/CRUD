@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+@Entity(name = "mueble_has_entrega")
 @Setter
 @Getter
 @IdClass(MuebleEntregaKey.class)
@@ -43,6 +43,45 @@ public class MuebleEntregasEntity {
     @Override
     public String toString() {
         return "MuebleEntregasEntity [entrega=" + entrega + ", mueble=" + mueble + ", cantidad=" + cantidad + "]";
+    }
+
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((entrega == null) ? 0 : entrega.hashCode());
+        result = prime * result + ((mueble == null) ? 0 : mueble.hashCode());
+        result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
+        return result;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MuebleEntregasEntity other = (MuebleEntregasEntity) obj;
+        if (entrega == null) {
+            if (other.entrega != null)
+                return false;
+        } else if (!entrega.equals(other.entrega))
+            return false;
+        if (mueble == null) {
+            if (other.mueble != null)
+                return false;
+        } else if (!mueble.equals(other.mueble))
+            return false;
+        if (cantidad == null) {
+            if (other.cantidad != null)
+                return false;
+        } else if (!cantidad.equals(other.cantidad))
+            return false;
+        return true;
     }
     
     

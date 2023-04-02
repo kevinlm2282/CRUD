@@ -2,6 +2,7 @@ package com.example.hope.DAO.Entity;
 
 import java.security.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,10 +30,9 @@ import lombok.ToString;
 @Entity
 @Setter
 @Getter
-@ToString
 @NoArgsConstructor
 @Table(name = "mueble",schema = "hope")
-public class MuebleEntity {
+public class Long {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mueble_generator")
     @SequenceGenerator(name = "mueble_generator", allocationSize = 1 ,schema = "hope")
@@ -50,16 +50,24 @@ public class MuebleEntity {
     private LocalDateTime creatioDateTime;
     @UpdateTimestamp
     private LocalDateTime updatDateTime;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mueble", fetch = FetchType.LAZY)
-    private List<MuebleEntregasEntity> entregas;
+    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "mueble", fetch = FetchType.LAZY)
+    // private List<MuebleEntregasEntity> entregas = new ArrayList<>();
 
-    public MuebleEntity(Long id, String nombre, String color, Integer cantidad, Double precio) {
+    public Long(Long id, String nombre, String color, Integer cantidad, Double precio) {
         this.id = id;
         this.nombre = nombre;
         this.color = color;
         this.cantidad = cantidad;
         this.precio = precio;
     }
+
+    @Override
+    public String toString() {
+        return "MuebleEntity [id=" + id + ", nombre=" + nombre + ", color=" + color + ", cantidad=" + cantidad
+                + ", precio=" + precio + ", creatioDateTime=" + creatioDateTime + ", updatDateTime=" + updatDateTime
+                + "]";
+    }
+
 
     
 

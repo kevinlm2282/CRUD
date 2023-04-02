@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hope.BL.MuebleBL;
-import com.example.hope.DAO.Entity.MuebleEntity;
+import com.example.hope.DAO.Entity.Long;
+import com.example.hope.DTO.MuebleDTO;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,32 +38,51 @@ public class MuebleController {
     public MuebleController(MuebleBL muebleBL) {
         this.muebleBL = muebleBL;
     }
-
+    // Las requests que regresa objetos DTO 
+    //* */
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<MuebleEntity>> obtenerMuebles() {
+    public ResponseEntity<List<MuebleDTO>> obtenerMueblesDTO() {
         LOGGER.info("REQUEST: Iniciando petición para obtener el listado de Muebles");
-        List<MuebleEntity> result = muebleBL.getMuebles();
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<MuebleEntity> saveUser(@RequestBody MuebleEntity mueble) {
-        LOGGER.info("REQUEST: Iniciando petición para guardar un mueble");
-        MuebleEntity result = muebleBL.postMueble(mueble);
+        List<MuebleDTO> result = muebleBL.getMueblesDTO();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<MuebleEntity> obtenerMueble(@PathVariable Long id) {
+    public ResponseEntity<MuebleDTO> obtenerMuebleDTO(@PathVariable Long id) {
         LOGGER.info("REQUEST: Iniciando petición para obtener el mueble");
-        MuebleEntity result = muebleBL.getMueble(id);
+        MuebleDTO result = muebleBL.getMuebleDTO(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }    
+    // reque
+    //* */
+
+    // LAs request que regresan Entidades ENTITY
+    //* */
+    @RequestMapping(method = RequestMethod.GET, value = "/entity")
+    public ResponseEntity<List<Long>> obtenerMuebles() {
+        LOGGER.info("REQUEST: Iniciando petición para obtener el listado de Muebles");
+        List<Long> result = muebleBL.getMuebles();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Long> saveUser(@RequestBody Long mueble) {
+        LOGGER.info("REQUEST: Iniciando petición para guardar un mueble");
+        Long result = muebleBL.postMueble(mueble);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "entity/{id}")
+    public ResponseEntity<Long> obtenerMueble(@PathVariable Long id) {
+        LOGGER.info("REQUEST: Iniciando petición para obtener el mueble");
+        Long result = muebleBL.getMueble(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<MuebleEntity> actualizarMueble(@RequestBody MuebleEntity muebleEntity) {
+    public ResponseEntity<Long> actualizarMueble(@RequestBody Long muebleEntity) {
         LOGGER.info("REQUEST: Inicio de peticion de actualizacion de mueble");
-        MuebleEntity result = muebleBL.putMueble(muebleEntity);
+        Long result = muebleBL.putMueble(muebleEntity);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
