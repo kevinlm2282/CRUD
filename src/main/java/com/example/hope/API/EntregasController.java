@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,8 @@ public class EntregasController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST)
+    // @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<EntregaEntity> saveUser(@RequestBody EntregaEntity entrega) {
         LOGGER.info("REQUEST: Iniciando petición para guardar una entrega",entrega);
         EntregaEntity result = entregaBL.postEntrega(entrega);

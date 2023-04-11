@@ -12,12 +12,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.hope.DAO.Entity.EntregaEntity;
-import com.example.hope.DAO.Entity.Long;
+import com.example.hope.DAO.Entity.MuebleEntity;
 import com.example.hope.DAO.Repository.EntregaRepository;
 import com.example.hope.DAO.Repository.MuebleRepository;
 import com.example.hope.DAO.id_class.MuebleEntregasEntity;
 
 import jakarta.transaction.*;
+import lombok.extern.java.Log;
 
 
 @Service
@@ -86,6 +87,7 @@ public class EntregaBL {
         }).collect(Collectors.toList())
         );
         EntregaEntity entregaEntity = entregaRepository.save(entreGuardar);
+        LOGGER.info("La entrega es {}", entregaEntity);
         return entregaEntity;
     }
     

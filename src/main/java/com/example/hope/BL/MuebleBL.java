@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
-import com.example.hope.DAO.Entity.Long;
+import com.example.hope.DAO.Entity.MuebleEntity;
 import com.example.hope.DAO.Repository.MuebleRepository;
 import com.example.hope.DTO.MuebleDTO;
 
@@ -34,7 +34,7 @@ public class MuebleBL {
     public List<MuebleDTO> getMueblesDTO() {
         LOGGER.info("BUSINESS-LOGIC: Se inicia la consulta para obtener el listado de muebles");
         List<MuebleDTO> listadoMuebles = new ArrayList<>();
-        List<Long> listaMuebles = this.muebleRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        List<MuebleEntity> listaMuebles = this.muebleRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         listaMuebles.stream().forEach(mueble->{
             MuebleDTO muebleDTO = new MuebleDTO();
             listadoMuebles.add(muebleDTO.convertToDTO(mueble));
@@ -55,38 +55,38 @@ public class MuebleBL {
 
 
 
-    public List<Long> getMuebles() {
+    public List<MuebleEntity> getMuebles() {
         LOGGER.info("BUSINESS-LOGIC: Iniciando consulta para obtener el listado de muebles");
-        List<Long> listaMuebles = this.muebleRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        List<MuebleEntity> listaMuebles = this.muebleRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         LOGGER.info("BUSINESS-LOGIC: La consulta para obtener muebles regresa esto: ", listaMuebles);
         return listaMuebles;
     }
 
-    public Long getMueble(Long id){
+    public MuebleEntity getMueble(Long id){
         LOGGER.info("BUSINNES-LOGIC: Iniciando consulta para obtener un mueble");
-        Long muebleEntity = this.muebleRepository.findById(id).orElseThrow();
+        MuebleEntity muebleEntity = this.muebleRepository.findById(id).orElseThrow();
         LOGGER.info("BUSINNES-LOGIC: La consulta de busqueda de mueble regresa: ",muebleEntity);
         return muebleEntity;
     }
 
     @Transactional
-    public Long postMueble(Long mueble){
+    public MuebleEntity postMueble(MuebleEntity mueble){
         LOGGER.info("BUSINESS-LOGIC Iniciado consulta para guardar mueble");
-        Long muebleEntity = this.muebleRepository.save(mueble);
+        MuebleEntity muebleEntity = this.muebleRepository.save(mueble);
         LOGGER.info("El resultado de la consulta de registro de mueble es {}:", muebleEntity);
         return muebleEntity;
     }
 
-    public Long putMueble(Long mueble) {
+    public MuebleEntity putMueble(MuebleEntity mueble) {
         LOGGER.info("BUSINNES-LOGIC Iniciando actualizacion de mueble");
-        Long muebleEntity = this.muebleRepository.findById(mueble.getId()).orElseThrow();
+        MuebleEntity muebleEntity = this.muebleRepository.findById(mueble.getId()).orElseThrow();
         System.out.println(muebleEntity);
         muebleEntity.setNombre(mueble.getNombre());
         muebleEntity.setColor(mueble.getColor());
         muebleEntity.setCantidad(mueble.getCantidad());
         muebleEntity.setPrecio(mueble.getPrecio());
         muebleEntity.setUpdatDateTime(LocalDateTime.now());
-        Long actualizar = this.muebleRepository.save(muebleEntity);
+        MuebleEntity actualizar = this.muebleRepository.save(muebleEntity);
         LOGGER.info("BUSINNES-LOGIC El resultado de la peticion de actualizacion es:",actualizar);
         return actualizar;
     }

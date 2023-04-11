@@ -3,7 +3,7 @@ package com.example.hope.DTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 
-import com.example.hope.DAO.Entity.Long;
+import com.example.hope.DAO.Entity.MuebleEntity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,13 +31,13 @@ public class MuebleDTO {
         return new ModelMapper();
     }
 
-    public MuebleDTO convertToDTO(Long muebEntity) {
+    public MuebleDTO convertToDTO(MuebleEntity muebEntity) {
         MuebleDTO muebleDTO = modelMapper().map(muebEntity, MuebleDTO.class);
         return muebleDTO;
     }
 
-    public Long convertToEntity(MuebleDTO muebleDTO) {
-        Long muebleEntity = modelMapper().map(muebleDTO, Long.class);
+    public MuebleEntity convertToEntity(MuebleDTO muebleDTO) {
+        MuebleEntity muebleEntity = modelMapper().map(muebleDTO, MuebleEntity.class);
         return muebleEntity;
     }
 

@@ -44,6 +44,8 @@ public class EntregaEntity {
     private String cliente;
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "entrega", fetch = FetchType.LAZY)
     private List<MuebleEntregasEntity> muebles = new ArrayList<>();
+    // @OneToMany(mappedBy = "entrega", cascade = CascadeType.ALL)
+    // private List<MuebleEntregasEntity> muebles = new ArrayList<>();
 
     public EntregaEntity(Long id, Date fecha_entrega, Date fecha_entrega_real, Date fecha_inicio_pedido,
             String cliente) {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hope.BL.MuebleBL;
-import com.example.hope.DAO.Entity.Long;
+import com.example.hope.DAO.Entity.MuebleEntity;
 import com.example.hope.DTO.MuebleDTO;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,30 +59,30 @@ public class MuebleController {
     // LAs request que regresan Entidades ENTITY
     //* */
     @RequestMapping(method = RequestMethod.GET, value = "/entity")
-    public ResponseEntity<List<Long>> obtenerMuebles() {
+    public ResponseEntity<List<MuebleEntity>> obtenerMuebles() {
         LOGGER.info("REQUEST: Iniciando petición para obtener el listado de Muebles");
-        List<Long> result = muebleBL.getMuebles();
+        List<MuebleEntity> result = muebleBL.getMuebles();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Long> saveUser(@RequestBody Long mueble) {
+    public ResponseEntity<MuebleEntity> saveUser(@RequestBody MuebleEntity mueble) {
         LOGGER.info("REQUEST: Iniciando petición para guardar un mueble");
-        Long result = muebleBL.postMueble(mueble);
+        MuebleEntity result = muebleBL.postMueble(mueble);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "entity/{id}")
-    public ResponseEntity<Long> obtenerMueble(@PathVariable Long id) {
+    public ResponseEntity<MuebleEntity> obtenerMueble(@PathVariable Long id) {
         LOGGER.info("REQUEST: Iniciando petición para obtener el mueble");
-        Long result = muebleBL.getMueble(id);
+        MuebleEntity result = muebleBL.getMueble(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Long> actualizarMueble(@RequestBody Long muebleEntity) {
+    public ResponseEntity<MuebleEntity> actualizarMueble(@RequestBody MuebleEntity muebleEntity) {
         LOGGER.info("REQUEST: Inicio de peticion de actualizacion de mueble");
-        Long result = muebleBL.putMueble(muebleEntity);
+        MuebleEntity result = muebleBL.putMueble(muebleEntity);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 

@@ -28,16 +28,27 @@ public class MuebleEntregasEntity {
     @Id
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private MuebleEntity mueble;
+    // @EmbeddedId
+    // private MuebleEntregasKey id;
+
+    // @ManyToOne
+    // @JoinColumn(name = "mueble_id")
+    // @MapsId("muebleId")
+    // private MuebleEntity mueble;
+
+    // @ManyToOne
+    // @JoinColumn(name = "entrega_id")
+    // @MapsId("entregaId")
+    // private EntregaEntity entrega;
 
     @Column(name = "cantidad")
-    private Integer cantidad;
-
+    private int cantidad;
     
-    public MuebleEntregasEntity(EntregaEntity entrega, MuebleEntity mueble, Integer cantidad) {
-        this.entrega = entrega;
-        this.mueble = mueble;
-        this.cantidad = cantidad;
-    }
+    // public MuebleEntregasEntity(EntregaEntity entrega, MuebleEntity mueble, Integer cantidad) {
+    //     this.entrega = entrega;
+    //     this.mueble = mueble;
+    //     this.cantidad = cantidad;
+    // }
 
 
     @Override
@@ -45,17 +56,15 @@ public class MuebleEntregasEntity {
         return "MuebleEntregasEntity [entrega=" + entrega + ", mueble=" + mueble + ", cantidad=" + cantidad + "]";
     }
 
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((entrega == null) ? 0 : entrega.hashCode());
         result = prime * result + ((mueble == null) ? 0 : mueble.hashCode());
-        result = prime * result + ((cantidad == null) ? 0 : cantidad.hashCode());
+        result = prime * result + cantidad;
         return result;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -76,13 +85,14 @@ public class MuebleEntregasEntity {
                 return false;
         } else if (!mueble.equals(other.mueble))
             return false;
-        if (cantidad == null) {
-            if (other.cantidad != null)
-                return false;
-        } else if (!cantidad.equals(other.cantidad))
+        if (cantidad != other.cantidad)
             return false;
         return true;
     }
+
+   
+
+
     
     
 }

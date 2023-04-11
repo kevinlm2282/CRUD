@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.example.hope.DAO.id_class.MuebleEntregasEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -32,7 +33,7 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @Table(name = "mueble",schema = "hope")
-public class Long {
+public class MuebleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mueble_generator")
     @SequenceGenerator(name = "mueble_generator", allocationSize = 1 ,schema = "hope")
@@ -50,10 +51,13 @@ public class Long {
     private LocalDateTime creatioDateTime;
     @UpdateTimestamp
     private LocalDateTime updatDateTime;
-    // @OneToMany(cascade = CascadeType.ALL, mappedBy = "mueble", fetch = FetchType.LAZY)
-    // private List<MuebleEntregasEntity> entregas = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mueble", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<MuebleEntregasEntity> entregas = new ArrayList<>();
+    // @OneToMany(mappedBy = "mueble")
+    // private List<MuebleEntregasEntity> entregados = new ArrayList<>();
 
-    public Long(Long id, String nombre, String color, Integer cantidad, Double precio) {
+    public MuebleEntity(Long id, String nombre, String color, Integer cantidad, Double precio) {
         this.id = id;
         this.nombre = nombre;
         this.color = color;
